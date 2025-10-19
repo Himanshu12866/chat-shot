@@ -21,7 +21,7 @@ const SideBar = ({ selectedUser, setSelectedUser }) => {
                 </div>
                 <div className='flex items-center px-5 py-2 mt-5 rounded-full  gap-3 bg-[#282142] '>
                     <img src={assets.search_icon} alt='' className='w-3' />
-                    <input type='text' placeholder='Search or start new chat' className='bg-transparent border-none text-white text-lg flex-1 placeholder:text-[#8c8c8c] outline-none' />
+                    <input type='text' placeholder='Search or start new chat' className='bg-transparent border-none text-white text-sm flex-1 placeholder:text-[#8c8c8c] outline-none' />
                 </div>
             </div>
             <div className='flex flex-col gap-3 '>
