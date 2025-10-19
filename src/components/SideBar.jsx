@@ -1,0 +1,52 @@
+import React from 'react'
+import assets, { userDummyData } from '../assets/assets'
+import { useNavigate } from 'react-router-dom'
+
+const SideBar = ({ selectedUser, setSelectedUser }) => {
+    const navigate = useNavigate()
+    return (
+        <div className={`bg-[#1885b2]/10 h-full p-5 rounded-r-xl text-white overflow-y-hidden ${selectedUser ? 'mx-md-hidden' : ''}`}>
+
+            <div className='pb-5'>
+                <div className='flex justify-between items-center'>
+                    <img src={assets.logo} alt='logo' className='max-w-40' />
+                    <div className='relative py-2 group'>
+                        <img src={assets.menu_icon} alt='logo' className='max-h-5 cursor-pointer' />
+                        <div className='absolute top-full right-0 z-20 w-32 p-5 rounded-md bg-[#282142] border border-gray-500 text-gray-100 hidden group-hover:block'>
+                            <p className='cursor-pointer text-sm' onClick={() => navigate("/profile")}>Edit Profile</p>
+                            <hr className='my-2 border-t border-gray-500'></hr>
+                            <p className='cursor-pointer text-sm'>Log Out</p>
+                        </div>
+                    </div>
+                </div>
+                <div className='flex items-center px-5 py-2 mt-5 rounded-full  gap-3 bg-[#282142] '>
+                    <img src={assets.search_icon} alt='' className='w-3' />
+                    <input type='text' placeholder='Search or start new chat' className='bg-transparent border-none text-white text-lg flex-1 placeholder:text-[#8c8c8c] outline-none' />
+                </div>
+            </div>
+            <div className='flex flex-col gap-3 '>
+                {
+                    userDummyData.map((user, index) => (
+
+                        <div key={index} onClick={() => setSelectedUser(user)} className={`relative flex items-center gap-2 p-2 pl-4 rounded-2xl cursor-pointer max-sm:text-xs  ${selectedUser?._id === user._id ? 'bg-[#1885b2]/30' : 'hover:bg-[#1885b2]/20'}`}>
+
+                            <img src={user?.profilePic || assets.avatar_icon} className='w-[35px] aspect-[1/1] rounded-full' />
+                            <div className='flex flex-col leading-5 '>
+                                <p>
+                                    {user.fullName}
+                                </p>
+                                {
+                                    index > 3 ? <span className='text-green-500 text-xs'>Online</span> : <span className='text-gray-500 text-xs'>Offline</span>
+                                }
+                            </div>
+                            {
+                                index > 2 && <p className='top-4 right-4 rounded-full text-xs absolute flex justify-center items-center w-4 h-4 bg-violet-500/50'>{index}</p>
+                            }
+                        </div>))
+                }
+            </div>
+        </div>
+    )
+}
+
+export default SideBar
